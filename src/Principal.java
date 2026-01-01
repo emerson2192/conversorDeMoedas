@@ -26,7 +26,9 @@ public class Principal {
             System.out.print("Escolha uma opção: ");
             opcao = leitor.nextInt();
 
-            if (opcao == 0) break;
+            if (opcao == 0) {
+                break;
+            }
 
             System.out.print("Digite o valor: ");
             double valor = leitor.nextDouble();
@@ -46,7 +48,7 @@ public class Principal {
                 continue;
             }
 
-            // 🔥 AGORA usa ExchangeResponse
+           
             Dadosmoedas dados = api.buscarCotacao(moeda);
 
             if (dados == null || !"success".equals(dados.result())) {
@@ -54,7 +56,7 @@ public class Principal {
                 continue;
             }
 
-            // 🔥 Acessa conversion_rates
+
             double taxa = dados.conversion_rates().BRL();
             double convertido = valor * taxa;
 
