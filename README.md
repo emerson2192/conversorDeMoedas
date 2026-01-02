@@ -60,15 +60,15 @@ Todas as conversões são feitas para BRL(Real).
 ## Estrutura do Projeto
 
 ```
-📁 conversor-moedas-java
- ┣ 📄 Principal.java        # Classe principal (menu e interação)
- ┣ 📄 ApiService.java       # Consumo da API e requisição HTTP
- ┣ 📄 DadosMoedas.java      # Mapeamento do JSON da API
- ┣ 📄 ConversionRates.java  # Record com as taxas de câmbio
- ┗ 📄 README.md
+ conversor-moedas-java
+ ┣  Principal.java        # Classe principal (menu e interação)
+ ┣  ApiService.java       # Consumo da API e requisição HTTP
+ ┣  DadosMoedas.java      # Mapeamento do JSON da API
+ ┣  ConversionRates.java  # Record com as taxas de câmbio
+ ┗  README.md
 ```
 
-## 🧪 Exemplo de Uso
+## Exemplo de Uso
 
 ```
 CONVERSOR DE MOEDAS
