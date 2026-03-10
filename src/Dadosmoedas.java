@@ -1,6 +1,7 @@
 public record Dadosmoedas(
         String result,
         String base_code,
-        ConversionRates conversion_rates
+        String target_code,
+        double conversion_rate
 ) {}
 

@@ -10,15 +10,16 @@ public class Principal {
         int opcao;
 
         do {
+
             System.out.println("""
                 =========================
                 CONVERSOR DE MOEDAS
-                1 - USD (Dólar)
-                2 - EUR (Euro)
-                3 - GBP (Libra)
-                4 - ARS (Peso Argentino)
-                5 - CLP (Peso Chileno)
-                6 - COP (Peso Colombiano)
+                1 - Dollar ==> Peso argentino
+                2 - Peso argentino ==> Dollar
+                3 - Dollar ==> Real brasileiro
+                4 - Real brasileiro ==> Dollar
+                5 - Dollar ==> Peso colombiano
+                6 - Peso colombiano ==> Dollar
                 0 - Sair
                 =========================
                 """);
@@ -33,34 +34,61 @@ public class Principal {
             System.out.print("Digite o valor: ");
             double valor = leitor.nextDouble();
 
-            String moeda = switch (opcao) {
-                case 1 -> "USD";
-                case 2 -> "EUR";
-                case 3 -> "GBP";
-                case 4 -> "ARS";
-                case 5 -> "CLP";
-                case 6 -> "COP";
-                default -> null;
-            };
+            String base = null;
+            String target = null;
 
-            if (moeda == null) {
-                System.out.println("Opção inválida!");
-                continue;
+            switch (opcao) {
+
+                case 1 -> {
+                    base = "USD";
+                    target = "ARS";
+                }
+
+                case 2 -> {
+                    base = "ARS";
+                    target = "USD";
+                }
+
+                case 3 -> {
+                    base = "USD";
+                    target = "BRL";
+                }
+
+                case 4 -> {
+                    base = "BRL";
+                    target = "USD";
+                }
+
+                case 5 -> {
+                    base = "USD";
+                    target = "COP";
+                }
+
+                case 6 -> {
+                    base = "COP";
+                    target = "USD";
+                }
+
+                default -> {
+                    System.out.println("Opção inválida!");
+                    continue;
+                }
             }
 
-           
-            Dadosmoedas dados = api.buscarCotacao(moeda);
+            Dadosmoedas dados = api.buscarCotacao(base, target);
 
             if (dados == null || !"success".equals(dados.result())) {
                 System.out.println("Erro ao obter cotação.");
                 continue;
             }
 
-
-            double taxa = dados.conversion_rates().BRL();
+            double taxa = dados.conversion_rate();
             double convertido = valor * taxa;
 
-            System.out.println("Valor convertido: R$ " + convertido);
+            System.out.println(
+                    "Resultado: " + valor + " " + base +
+                            " = " + convertido + " " + target
+            );
 
         } while (true);
 

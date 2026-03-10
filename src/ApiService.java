@@ -8,11 +8,12 @@ public class ApiService {
 
     private static final String API_KEY = "f97f7b97ba367f210bebbfe2";
 
-    public Dadosmoedas buscarCotacao(String base) {
+    public Dadosmoedas buscarCotacao(String base, String target) {
 
         try {
+
             String url = "https://v6.exchangerate-api.com/v6/"
-                    + API_KEY + "/latest/" + base;
+                    + API_KEY + "/pair/" + base + "/" + target;
 
             HttpClient client = HttpClient.newHttpClient();
 
@@ -24,14 +25,12 @@ public class ApiService {
             HttpResponse<String> response =
                     client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println("Status HTTP: " + response.statusCode());
-
-
             Gson gson = new Gson();
+
             return gson.fromJson(response.body(), Dadosmoedas.class);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Erro ao buscar cotação: " + e.getMessage());
             return null;
         }
     }
